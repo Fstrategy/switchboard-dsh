@@ -33,8 +33,8 @@ const sha256 = bytes => createHash('sha256').update(bytes).digest('hex')
 const sorted = values => [...values].sort()
 
 export function verifyManifest(pkg, { packed = false } = {}) {
-  assert.equal(pkg.name, '@fstrategy/switchboard-dsh')
-  assert.equal(pkg.version, '0.1.0')
+  assert.equal(pkg.name, '@lumir_kumou/switchboard-dsh')
+  assert.equal(pkg.version, '0.1.1')
   assert.equal(pkg.private, false)
   assert.equal(pkg.license, 'MIT')
   assert.equal(pkg.type, 'module')
@@ -45,6 +45,8 @@ export function verifyManifest(pkg, { packed = false } = {}) {
   assert.equal(pkg.repository.url, 'https://github.com/Fstrategy/switchboard-dsh.git')
   assert.equal(pkg.homepage, 'https://github.com/Fstrategy/switchboard-dsh#readme')
   assert.equal(pkg.bugs.url, 'https://github.com/Fstrategy/switchboard-dsh/issues')
+  assert.deepEqual(pkg.publishConfig, { access: 'public', registry: 'https://registry.npmjs.org/' })
+  assert.deepEqual(pkg.keywords, ['dsh-plugin', 'deepseek-harness', 'switchboard', 'session-board', 'cordis'])
   assert.deepEqual(sorted(pkg.files), sorted(RUNTIME_FILES), 'Use the exact runtime files allowlist')
   assert.equal(pkg.scripts.typecheck, 'tsc --noEmit')
   for (const hook of ['preinstall', 'install', 'postinstall', 'prepare', 'prepack', 'postpack', 'prepublish', 'prepublishOnly', 'publish', 'postpublish']) {
@@ -79,6 +81,11 @@ export function scanText(path, text, label = path) {
   for (const match of text.matchAll(/@local\/[A-Za-z0-9_.-]*/g)) {
     // The README documents removing the old prototype, never registering it.
     if (!(path === 'README.md' && match[0] === '@' + 'local/switchboard-dsh')) fail('Private package identity', match.index)
+  }
+  if (['package.json', 'cordis.patch.yml', 'src/client.tsx', 'dist/client.js', 'dist/index.js'].includes(path)) {
+    // Historical documentation/index entries are valid; current runtime identities must use the npm scope.
+    const match = /@fstrategy\/[A-Za-z0-9_.-]*/.exec(text)
+    if (match) fail('Legacy package identity', match.index)
   }
   const forbidden = [
     [/https?:\/\/(?:localhost|127(?:\.\d{1,3}){3}|\[::1\])(?::\d+)?\b/gi, 'Local GUI URL'],
@@ -275,6 +282,11 @@ function selfTest() {
   assert.throws(() => scanText('README.md', '@' + 'local/example'), /package identity/)
   scanText('README.md', '@' + 'local/switchboard-dsh')
   assert.throws(() => scanText('src/client.tsx', '@' + 'local/switchboard-dsh'), /package identity/)
+  scanText('README.md', '@' + 'fstrategy/switchboard-dsh')
+  scanText('docs/PORTING-dsh.md', '@' + 'fstrategy/switchboard-dsh')
+  scanText('plugin-index.json', '@' + 'fstrategy/switchboard-dsh')
+  assert.throws(() => scanText('src/client.tsx', '@' + 'fstrategy/switchboard-dsh'), /package identity/)
+  assert.throws(() => scanText('dist/client.js', '@' + 'fstrategy/switchboard-dsh'), /package identity/)
   const sourceManifest = { name: 'example', private: false, packageManager: 'pnpm@11.28.5' }
   comparePackedManifest(sourceManifest, { name: 'example', private: false })
   comparePackedManifest(sourceManifest, structuredClone(sourceManifest))
@@ -316,7 +328,7 @@ async function main() {
   }
   const archive = await verifyArchive(resolve(args[0]))
   console.log(`PASS: exact ${archive.files}-file runtime archive; SHA-256 ${archive.sha256}`)
-  console.log('GitHub Release bundle only: no npm-registry publication or runtime/UI installation was performed by this check.')
+  console.log('Integrity verification only: this check performs no npm-registry publication, runtime/UI installation or model requests.')
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

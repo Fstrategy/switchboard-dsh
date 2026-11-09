@@ -1,6 +1,6 @@
 {
-  "name": "@fstrategy/switchboard-dsh",
-  "version": "0.1.0",
+  "name": "@lumir_kumou/switchboard-dsh",
+  "version": "0.1.1",
   "private": false,
   "description": "Switchboard session board for dsh, ported from Fstrategy/switchboard. Community-made, not an official DeepSeek product.",
   "license": "MIT",
@@ -8,6 +8,8 @@
   "homepage": "https://github.com/Fstrategy/switchboard-dsh#readme",
   "bugs": { "url": "https://github.com/Fstrategy/switchboard-dsh/issues" },
   "packageManager": "pnpm@11.28.5",
+  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
+  "keywords": ["dsh-plugin", "deepseek-harness", "switchboard", "session-board", "cordis"],
   "type": "module",
   "engines": { "node": ">=24.9.0", "dsh": "0.2.2-rc.1" },
   "exports": {

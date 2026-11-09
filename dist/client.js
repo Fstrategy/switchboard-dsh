@@ -1,4 +1,4 @@
-window.__ModuleLoader__.load({id:"@fstrategy/switchboard-dsh",factory(require){const module={exports:{}};const exports=module.exports;
+window.__ModuleLoader__.load({id:"@lumir_kumou/switchboard-dsh",factory(require){const module={exports:{}};const exports=module.exports;
 "use strict";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -268,7 +268,7 @@ var styles_default = '/* Native Harness surfaces only. All palette references we
 
 // src/client.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
-var PACKAGE_ID = "@fstrategy/switchboard-dsh";
+var PACKAGE_ID = "@lumir_kumou/switchboard-dsh";
 var PANE_KIND = "switchboard";
 var POLL_MS = 5e3;
 var RPC_TIMEOUT_MS = 45e3;

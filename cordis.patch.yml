@@ -1,6 +1,6 @@
 - insert:
     - id: switchboard-dsh
-      name: '@fstrategy/switchboard-dsh'
+      name: '@lumir_kumou/switchboard-dsh'
       config:
         summaries: false
         modelMode: fake

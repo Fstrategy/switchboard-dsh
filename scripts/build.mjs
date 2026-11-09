@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 const root = fileURLToPath(new URL('../', import.meta.url))
 const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'))
 const client = await readFile(new URL('../src/client.tsx', import.meta.url), 'utf8')
-assert.equal(pkg.name, '@fstrategy/switchboard-dsh')
+assert.equal(pkg.name, '@lumir_kumou/switchboard-dsh')
 assert.equal(client.match(/^export const PACKAGE_ID = (['"])([^'"]+)\1$/m)?.[2], pkg.name,
   'Client registration id must match the public package name')
 await mkdir(new URL('../dist/', import.meta.url), { recursive: true })

@@ -1,23 +1,67 @@
 # Releasing
 
-Distribution is a public GitHub Release tarball, not an npm registry publication. The maintainer must have permission to create releases on `Fstrategy/switchboard-dsh`; no token should be stored in the repository or pasted into issue/chat messages.
+The `0.1.1` release target is the public npm package `@lumir_kumou/switchboard-dsh` plus the matching GitHub Release in `Fstrategy/switchboard-dsh`. The earlier `v0.1.0` asset and its `@fstrategy/switchboard-dsh` identity remain immutable. Instructions below are a procedure, not a claim that either `0.1.1` publication has completed.
 
-## Gates
+**Ship one tested, prepacked tarball to both npm and GitHub.** Do not publish from the working directory or rebuild/repack between destinations. Installing the public package requires no npm login; publishing requires an authorized maintainer who controls the npm scope and has GitHub release permission.
 
-1. Keep `engines.dsh` at the exact runtime actually tested. Do not widen the range on assumption.
-2. Use the pinned development dependencies with `pnpm install --frozen-lockfile --ignore-scripts`.
-3. Build, run fake-only tests, run `typecheck`, `check`, `upstream:check`, and `release:check -- --source-only`.
-4. Pack a **fresh** artifact with `pnpm pack --pack-destination artifacts`. This package has no prepack/prepare/install scripts. Do not reuse local acceptance archives, receipts or full-window screenshots.
-5. Run the release checker on the exact new `.tgz`. Compare its members to the runtime allowlist, inspect the staged Git file list separately, and check privacy-sensitive content in all public assets.
-6. Commit the reviewed source plus rebuilt `dist/`; Git-based installation must not depend on consumer-side prepare scripts. Use a non-private commit email when appropriate.
-7. Tag the reviewed commit, push to the approved public repository, and upload the matching `.tgz`, checksum and fake-test result as Release assets.
-8. Verify the public asset downloads without authentication and matches the local checksum. Exercise the same dsh plugin-manager entry point used by Plugins → Add plugin. A successful download alone is not activation verification.
-9. Publish exact GUI instructions: paste the full `.tgz` asset URL, install, then **Enable now**. Do not claim npm publication, default catalog inclusion, or an actual GUI click test that was not performed.
+## Local release gates
 
-If supplying `plugin-index.json`, use a real immutable full 40-character commit containing the prebuilt plugin. The optional index is user-added, not an official catalog. A Git source entry cannot point to a Release `.tgz` URL. See [distribution details](<docs/DISTRIBUTION.md>).
+1. Keep `engines.dsh` at the exact runtime actually tested: `0.2.2-rc.1`. Do not widen compatibility or platform claims on assumption.
+2. Verify the release manifest, bundle patch, built Client registration, and documentation consistently use `@lumir_kumou/switchboard-dsh` and version `0.1.1`. Keep shared behavior identifiers unchanged; users must uninstall older identities before migration.
+3. Use pinned development dependencies, rebuild, and run fake-only checks:
+
+   ```sh
+   pnpm install --frozen-lockfile --ignore-scripts
+   pnpm run build
+   pnpm test
+   pnpm run typecheck
+   pnpm run check
+   pnpm run upstream:check
+   node scripts/release-check.mjs --source-only
+   ```
+
+4. Review and stage only public allowlisted source plus rebuilt `dist/`. Git-source installation must not depend on consumer-side prepare scripts. Use a non-private commit email when appropriate. Check the staged file list and public assets separately from the archive.
+5. Pack a **fresh** artifact once, then check that exact archive:
+
+   ```sh
+   pnpm pack --pack-destination artifacts
+   node scripts/release-check.mjs artifacts/lumir_kumou-switchboard-dsh-0.1.1.tgz
+   ```
+
+   This package has no automatic install, pack, or publish lifecycle scripts. Review the archive's exact runtime allowlist and checksum. Do not reuse local acceptance archives, verification receipts, or full-window screenshots. Record the archive digest; no later build or repack may silently replace the bytes being approved.
+
+## npm publication: explicit maintainer action
+
+Confirm that the npm version is available to publish and that the authenticated user has permission for `@lumir_kumou`. Use the official npm registry, not a read-only mirror. The publishing CLI for this procedure is npm `11.19.1`.
+
+```sh
+npm publish ./artifacts/lumir_kumou-switchboard-dsh-0.1.1.tgz --access public --registry https://registry.npmjs.org/ --ignore-scripts
+```
+
+Keep the `./` prefix: npm can interpret an unprefixed two-component path as a GitHub repository shorthand. Publish the **tested archive file**, not `npm publish .`. Explicit `--access public` makes the scoped package public; `--ignore-scripts` prevents publish-time lifecycle hooks. Do not modify the archive after approval.
+
+Current npm account policy may require fresh browser authorization, two-factor authentication, an OTP, or another user confirmation. The maintainer must complete that flow directly in the official npm/CLI interface. Do not ask someone to paste tokens, recovery codes, or OTPs into chat; do not read, copy, commit, or upload authentication files. Do not disable 2FA, expand authorization scopes, or create an automatic publishing workflow to bypass a prompt. Stop and report an authorization problem instead of claiming publication succeeded.
+
+After npm confirms publication, verify the exact public name/version and anonymously retrieve the published `dist.tarball`; compare its bytes with the tested archive. Only then describe package-name installation as available. Mirrors can lag behind the official registry; do not republish or change versions merely to work around mirror caching.
+
+## GitHub publication: use the same bytes
+
+Tag the reviewed source as `v0.1.1`, push only the approved public repository content, and attach the same `lumir_kumou-switchboard-dsh-0.1.1.tgz` to that release with its checksum and fake-test result. Its asset URL is:
+
+```text
+https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.1/lumir_kumou-switchboard-dsh-0.1.1.tgz
+```
+
+Verify the asset downloads without authentication and matches the tested archive and the npm tarball. Never overwrite or relabel the existing `v0.1.0` artifact. GitHub Actions workflows and expanded GitHub workflow scope are not required; the release gates above are local commands.
+
+Verify installation and activation through the same plugin-manager entry point used by **Plugins → Add plugin**, only with separate permission to change a test profile. A successful download, archive check, or package-manager exit alone does not prove activation or rendered UI. Do not claim an actual GUI click test that was not performed.
+
+## Installation and optional index instructions
+
+Publish the primary instructions as **Plugins → Add plugin → `@lumir_kumou/switchboard-dsh` → Install → Enable now**. Show the exact version `@lumir_kumou/switchboard-dsh@0.1.1` and official registry `https://registry.npmjs.org/` for a mirror that has not synchronized. Installation itself requires no npm account or login. Keep the matching GitHub Release URL as an alternative and link the [migration guidance](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/README.md#从旧包迁移>).
+
+Only after verifying actual npm publication should the optional root index be updated to the new package identity/version with `source: { "type": "npm", "registry": "https://registry.npmjs.org/" }`, the real npm publication timestamp in Unix seconds, and `engines.dsh: "0.2.2-rc.1"`. Validate the resulting JSON. Do not retarget the old Git-backed `0.1.0` entry to a different identity or pretend a Release `.tgz` URL is a Git source. The index is explicitly user-added, not an official or default catalog. See [distribution details](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/docs/DISTRIBUTION.md>).
 
 ## Do not publish
 
-Local verification receipts, session IDs/titles/replies, loopback GUI URLs, personal home/profile paths, dependency stores, test builds, private configuration, old archives and whole-window screenshots are not public source. The cropped demo panel in this repository contains only synthetic data; the original full-window screenshot is intentionally excluded.
-
-GitHub Actions workflows are not included in this initial release. Tests/release gates are explicit local commands; no npm credentials or expanded GitHub workflow scope is required for the GitHub Release distribution path.
+Local verification receipts, session IDs/titles/replies, loopback GUI URLs, personal home/profile paths, dependency stores, test builds, private configuration, authentication data, old archives, and whole-window screenshots are not public source. The cropped demo panel contains only synthetic data; the original full-window screenshot is intentionally excluded.

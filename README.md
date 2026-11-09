@@ -6,33 +6,53 @@
 
 **看哪些 dsh 会话在等你、要你做什么，一键去回答。**
 
-移植自 [Fstrategy/switchboard](https://github.com/Fstrategy/switchboard)（原作者 Lumir，MIT）。本项目是社区插件，**非 DeepSeek/dsh 官方出品**；原始许可和来源保留在 [LICENSE](<LICENSE>) 与 [NOTICE](<NOTICE.md>)。
+移植自 [Fstrategy/switchboard](https://github.com/Fstrategy/switchboard)（原作者 Lumir，MIT）。本项目是社区插件，**非 DeepSeek/dsh 官方出品**；原始许可、来源和依赖声明保留在 [LICENSE](<LICENSE>)、[NOTICE](<NOTICE.md>) 与 [THIRD-PARTY-NOTICES](<THIRD-PARTY-NOTICES.md>)。
 
 ![当前 dsh 内的演示面板，只有虚构会话](<https://raw.githubusercontent.com/Fstrategy/switchboard-dsh/v0.1.0/docs/images/demo-zh.png>)
 
 这是真实 dsh 界面中的 demo 面板裁剪，不是独立网页或 mock；仅保留虚构会话面板，聊天、头像和本机会话信息不公开。
 
-### 在 dsh 插件页直接安装
+### 在 dsh 插件页按包名安装
 
-需要 **dsh 0.2.2-rc.1**（目前仅此版本经过验证）。
+需要 **dsh 0.2.2-rc.1**（目前仅此版本经过验证）。以下是 `0.1.1` 的安装目标；须等待该版本在官方 npm 注册表可用，不代表发布已完成。
 
 1. 打开 **插件 → 添加插件（Add plugin）**。
-2. 粘贴下方的完整公开 `.tgz` 链接，点击安装。
-3. 安装完成后点击 **立即启用（Enable now）**。若直接关闭安装结果页，包会保持未启用。
+2. 输入下方包名，点击 **安装**。
+3. 安装完成后点击 **立即启用（Enable now）**。若直接关闭安装结果页，包会保持未启用；按 dsh 提示重启。
 
 ```text
-https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.0/fstrategy-switchboard-dsh-0.1.0.tgz
+@lumir_kumou/switchboard-dsh
 ```
 
-这是 GitHub Release 的公开安装包，**不需要 npm 账号，也没有在 npm 注册表发布这个包名**。不要只输入包名或 GitHub Release 页面地址。也可以使用 CLI：
+**安装者不需要 npm 账号或登录。** npm 登录、发布权限及可能的浏览器确认/双因素验证只属于维护者的发布过程。
+
+若中国大陆镜像尚未同步，选择 **Registry → 官方 npm 注册表**（`https://registry.npmjs.org/`），并指定版本重试：
+
+```text
+@lumir_kumou/switchboard-dsh@0.1.1
+```
+
+镜像延迟不等于需要登录；若官方源仍不可用，检查该版本是否已经发布。也可以用 CLI 安装，`web` 应替换为实际 profile：
 
 ```sh
-dsh plugin --profile web add https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.0/fstrategy-switchboard-dsh-0.1.0.tgz
+dsh plugin --profile web add @lumir_kumou/switchboard-dsh@0.1.1
 ```
 
-把 `web` 换为你的实际 profile。Desktop 使用其自带的 dsh 命令，先彻底退出应用，再用 `--profile desktop` 安装后重新打开。
+### GitHub Release 安装替代方式
 
-**已有本地原型？** 请先卸载 `@local/switchboard-dsh`，再安装公开版 `@fstrategy/switchboard-dsh`；不要同时启用，两者使用相同的看板服务/命令/存储域。正常会话日志不会被删除。更新 Git/tarball 安装时使用卸载再安装新版本的方式。
+`v0.1.1` 的 Release 资产可用后，也可在 **添加插件** 中粘贴完整链接，再安装并 **立即启用**：
+
+```text
+https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.1/lumir_kumou-switchboard-dsh-0.1.1.tgz
+```
+
+旧版 [`v0.1.0` Release 安装包](<https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.0/fstrategy-switchboard-dsh-0.1.0.tgz>) 保持不变，其包名是 `@fstrategy/switchboard-dsh`；它不是新 npm 包名的安装入口。不要粘贴 Release 页面地址或 GitHub 源码 ZIP。
+
+### 从旧包迁移
+
+若曾安装 `@local/switchboard-dsh` 或 `@fstrategy/switchboard-dsh`，请先在 **插件** 页卸载旧包，再安装 `@lumir_kumou/switchboard-dsh`。三种身份共用看板服务、命令和存储域，**不要并存启用**；仅禁用会保留旧依赖。保留需要的设置，按提示重启，不要为迁移删除普通会话日志或手改 profile。
+
+Git/tarball 安装的版本变更采用卸载再安装；从旧包名转为新 npm 包名同样不是原地升级。详情见 [分发与升级说明](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/docs/DISTRIBUTION.md>)。
 
 ### 使用
 
@@ -46,14 +66,14 @@ dsh plugin --profile web add https://github.com/Fstrategy/switchboard-dsh/releas
 
 ### 发现列表与兼容范围
 
-公开链接已经可以用于“添加插件”；这**不等于自动出现在所有人的默认发现列表**。`dsh-plugin` 是 GitHub topic，不是官方认证或自动收录。可选的自有社区索引需要用户启用“自定义插件索引”并主动添加来源；详见 [分发说明](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.0/docs/DISTRIBUTION.md>)。
+按包名安装、npm 发布或公开链接**都不等于自动出现在所有人的默认发现列表**。`dsh-plugin` 是 GitHub topic，不是官方认证或自动收录。可选的自有社区索引需要用户启用“自定义插件索引”并主动添加来源；详见 [分发说明](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/docs/DISTRIBUTION.md>)。
 
 - 测试只用假模型；不为发布调用真实模型。
 - 当前兼容声明为精确的 `0.2.2-rc.1`，不建议绕过版本检查。
 - Windows/Linux 原生安装、深色像素外观、真实计费模型、跨 Host/跨进程聚合未完成实测。
 - dsh 没有通用的 Claude 桌面版 post-turn verdict 或新会话建议卡片，真实数据不捏造这些字段；关闭模型后，普通回复中的语义提问不作 AI 推断。
 
-完整数据映射与已知差异见 [PORTING-dsh](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.0/docs/PORTING-dsh.md>)。
+完整数据映射与已知差异见 [PORTING-dsh](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/docs/PORTING-dsh.md>)。
 
 ## English
 
@@ -61,19 +81,31 @@ See which dsh sessions are waiting on you, what they need, and jump to reply. A 
 
 Community port of [Fstrategy/switchboard](https://github.com/Fstrategy/switchboard), originally by Lumir (MIT). **Not an official DeepSeek/dsh product.**
 
-### Install from Plugins
+### Install by package name from Plugins
 
-Tested with **dsh 0.2.2-rc.1**. Open **Plugins → Add plugin**, paste the exact public `.tgz` URL below, install, then choose **Enable now**:
+Tested with **dsh 0.2.2-rc.1** only. After `0.1.1` is available on the official npm registry, open **Plugins → Add plugin**, enter the package name, install, then choose **Enable now**:
 
 ```text
-https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.0/fstrategy-switchboard-dsh-0.1.0.tgz
+@lumir_kumou/switchboard-dsh
 ```
 
-No npm login is required. The package identity is `@fstrategy/switchboard-dsh`, but it is distributed through GitHub Releases, **not published on the npm registry**. Remove the earlier `@local/switchboard-dsh` prototype before installing this public package; they must not run side by side. For Git/tarball upgrades, uninstall then install the new version.
+Users need **no npm account or login to install**. Only maintainers publishing a release need npm authorization and any required browser/2FA approval. These instructions identify the release target; they are not a publication-status claim.
+
+If a mainland China mirror has not synchronized, select the **official npm registry** (`https://registry.npmjs.org/`) in **Registry** and try `@lumir_kumou/switchboard-dsh@0.1.1`. If that is still unavailable, check whether the release has been published; logging in does not fix mirror lag.
+
+The alternative GitHub asset, once available, is:
+
+```text
+https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.1/lumir_kumou-switchboard-dsh-0.1.1.tgz
+```
+
+Paste that exact URL into **Add plugin**, install, then **Enable now**. The immutable [legacy v0.1.0 asset](<https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.0/fstrategy-switchboard-dsh-0.1.0.tgz>) keeps its earlier `@fstrategy/switchboard-dsh` identity; it is not the new npm package.
+
+**Migration:** uninstall the earlier `@local/switchboard-dsh` prototype and/or `@fstrategy/switchboard-dsh` through **Plugins** before installing `@lumir_kumou/switchboard-dsh`. They share service, command, and storage identifiers and must not run side by side. Disabling alone retains the old dependency. Keep any settings you need, follow restart instructions, and do not delete conversation logs or hand-edit the profile for this migration. Git/tarball upgrades use uninstall then reinstall; changing package identity is not an in-place registry update.
 
 Use `/switchboard` or `/switchboard demo`. Short-line summaries are **off by default**; off means no summary model calls. Fake mode stays local, demo uses prewritten facts, and live mode requires the user's explicit opt-in and configured small-model route.
 
-Public installation does not imply automatic inclusion in the default discovery catalog. See [distribution options and official references](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.0/docs/DISTRIBUTION.md>). Untested native targets include Windows/Linux, dark-mode pixels and real paid models; read the [porting map](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.0/docs/PORTING-dsh.md>) before changing supported runtime versions.
+Public installation does not imply automatic inclusion in the default discovery catalog. See [distribution options and official references](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/docs/DISTRIBUTION.md>). Untested native targets include Windows/Linux, dark-mode pixels and real paid models; read the [porting map](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/docs/PORTING-dsh.md>) before changing supported runtime versions.
 
 ### Develop from source
 
@@ -82,6 +114,7 @@ CLI development needs Node **>=24.9.0**. Build tools are pinned; the runtime tar
 ```sh
 git clone https://github.com/Fstrategy/switchboard-dsh.git
 cd switchboard-dsh
+git checkout v0.1.1
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm run build
 pnpm test
@@ -91,4 +124,4 @@ pnpm run upstream:check
 node scripts/release-check.mjs --source-only
 ```
 
-The three reusable upstream modules remain byte-for-byte unchanged. Tests inject fake collectors/models/transports and make no paid model calls. Prebuilt artifacts are committed for Git-source installs; normal users should prefer the versioned Release tarball. See [release procedure](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.0/RELEASING.md>) and [privacy/security notes](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.0/SECURITY.md>).
+The three reusable upstream modules remain byte-for-byte unchanged. Tests inject fake collectors/models/transports and make no paid model calls. Prebuilt artifacts are committed for Git-source installs; normal users should prefer the npm package name, with the matching versioned Release tarball as an alternative. See [release procedure](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/RELEASING.md>) and [privacy/security notes](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/SECURITY.md>).

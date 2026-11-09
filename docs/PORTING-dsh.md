@@ -4,6 +4,12 @@ Community port of [Fstrategy/switchboard](https://github.com/Fstrategy/switchboa
 
 The implementation targets **dsh 0.2.2-rc.1**. Package/API contracts and the installed implementation take precedence over newer upstream documentation. Public source deliberately excludes machine-local acceptance receipts, personal session logs/IDs and full-window screenshots.
 
+## npm distribution identity (v0.1.1)
+
+The npm package is `@lumir_kumou/switchboard-dsh`. The GitHub repository remains `Fstrategy/switchboard-dsh`; GitHub account names do not grant ownership of the same npm scope. The immutable v0.1.0 GitHub release used the earlier package identity and is retained as a historical alternative.
+
+The v0.1.1 change coordinates the package manifest, bundle patch, browser module-loader id and Client registration id. Behavioral service/projection/cache/command IDs stay stable, so old and new packages must not be enabled together. Remove the earlier installation before enabling the npm package. This is a distribution/identity update, not a new runtime API or broader compatibility claim.
+
 ## What stays unchanged
 
 - [Pure board logic](<../hooks/logic.ts>), [English/Chinese strings and prompts](<../hooks/i18n.ts>) and [demo facts](<../hooks/demo.ts>) are byte-for-byte copies, checked against pinned SHA-256 values.

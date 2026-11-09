@@ -9,7 +9,7 @@ import type { DshKey, Translate } from './dsh-i18n'
 // Embedded by the Client build's .css=text loader; never installed into document.head.
 import styles from './styles.css'
 
-export const PACKAGE_ID = '@fstrategy/switchboard-dsh'
+export const PACKAGE_ID = '@lumir_kumou/switchboard-dsh'
 export const PANE_KIND = 'switchboard'
 export const POLL_MS = 5_000
 const RPC_TIMEOUT_MS = 45_000
