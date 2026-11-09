@@ -1,0 +1,25 @@
+{
+  "format": 1,
+  "title": {"en":"Switchboard dsh community index","zh":"Switchboard dsh 社区索引"},
+  "description": {"en":"Independent Switchboard dsh releases. Not an official DeepSeek catalog.","zh":"独立发布的 Switchboard dsh 社区插件，非 DeepSeek 官方目录。"},
+  "plugins": [{
+    "name": "@fstrategy/switchboard-dsh",
+    "title": {"en":"Switchboard dsh","zh":"Switchboard dsh 会话看板"},
+    "description": {"en":"A native session board for DeepSeek Harness.","zh":"DeepSeek Harness 原生会话看板，查看等待动作并跳转回复。"},
+    "author": "Fstrategy",
+    "homepage": "https://github.com/Fstrategy/switchboard-dsh",
+    "repository": {"url":"https://github.com/Fstrategy/switchboard-dsh"},
+    "icon": "icon.svg",
+    "metadata": {"keywords":["switchboard","dsh","session board"]},
+    "versions": [{
+      "version": "0.1.0",
+      "publishTimestamp": 1794230537,
+      "source": {
+        "type": "git",
+        "url": "https://github.com/Fstrategy/switchboard-dsh",
+        "commit": "0f2deb78c4ec8ed6a7ed3bb9925c68887e1f3efc"
+      },
+      "engines": {"dsh":"0.2.2-rc.1"}
+    }]
+  }]
+}

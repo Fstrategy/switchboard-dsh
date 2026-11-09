@@ -54,13 +54,13 @@ Harness `0.2.2-rc.1` provides the experimental **Custom plugin indexes** bundle,
 3. Add the **raw JSON document's final URL**, not a repository page or a `github.com/.../blob/...` HTML page.
 4. Select that index, review the entry's source/version and trust notice, and confirm installation. Enable the installed bundle afterward.
 
-If this repository publishes the optional root-level index, its source URL is:
+This repository also publishes an optional root-level community index. Its source URL is:
 
 ```text
 https://raw.githubusercontent.com/Fstrategy/switchboard-dsh/main/plugin-index.json
 ```
 
-That URL is usable only after the actual JSON document has been published. The Release asset alone does not create an index.
+The actual JSON document pins v0.1.0 to the real prebuilt source commit `0f2deb78c4ec8ed6a7ed3bb9925c68887e1f3efc`. It is separate from the Release asset; users must add this source themselves. Publishing it does not add an index to anyone's profile.
 
 There is no official index configured by default. An author may host their own index without upstream approval; inclusion in someone else's community index is that index maintainer's decision. Every user still chooses which index sources to add. A label an index calls “official” is merely that index's claim, not DeepSeek verification.
 

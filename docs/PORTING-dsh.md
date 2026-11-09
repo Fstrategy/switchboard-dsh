@@ -80,3 +80,12 @@ The predecessor local build was exercised with real native sessions driven by an
 The public release is rebuilt, tested and packed under its new identity; release assets include fresh fake-test results and checksums after the release gates pass. [The illustration](<images/demo-zh.png>) is a crop of the actual dsh demo pane, containing only original synthetic data—not a generated mock UI. Public URL installation/activation must be verified separately; see [release gates](<../RELEASING.md>).
 
 Known limits: Windows/Linux native UI/install, dark-mode pixels, real paid providers, plugin-detail icon/localized metadata rendering, browser console, long-running scale and cross-Host aggregation have not all been exercised. Compatibility remains exactly the tested dsh runtime; no version exemptions are recommended. Normal dsh live session facts—not semantic guessing—remain available with summaries off.
+
+### Public v0.1.0 post-publication check
+
+- Public source/tag: `0f2deb78c4ec8ed6a7ed3bb9925c68887e1f3efc` / `v0.1.0`.
+- The actual Release tarball downloaded without authentication and matched the reviewed SHA-256: `a3945e4e14cdade62dbda0d49f37fe3ca75ba34465d88680eb00f02f30e026b5`.
+- On macOS with dsh 0.2.2-rc.1, removed the local prototype and installed the public HTTPS asset through the native plugin-manager operation also used by Plugins → Add plugin: `application=applied`, `warnings=[]`. This is an actual public-source installation/activation test, not a claim that mouse clicks in the Add dialog were automated.
+- Public Host Config entry and active Client composer slot use `@fstrategy/switchboard-dsh`; the running Host tool reads native facts successfully. A local-only window capture confirmed the installed public board and composer band rendered in the current GUI.
+- Summaries remained disabled: summary modelCalls=0, liveModelCalls=0, diagnostics=[]. No paid model was used for tests or verification.
+- The full-window verification capture and installation logs are not public assets. Only the reviewed synthetic demo-pane crop is distributed in this repository.
