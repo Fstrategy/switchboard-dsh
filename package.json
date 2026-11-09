@@ -1,0 +1,46 @@
+{
+  "name": "@fstrategy/switchboard-dsh",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Switchboard session board for dsh, ported from Fstrategy/switchboard. Community-made, not an official DeepSeek product.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/Fstrategy/switchboard-dsh.git" },
+  "homepage": "https://github.com/Fstrategy/switchboard-dsh#readme",
+  "bugs": { "url": "https://github.com/Fstrategy/switchboard-dsh/issues" },
+  "packageManager": "pnpm@11.28.5",
+  "type": "module",
+  "engines": { "node": ">=24.9.0", "dsh": "0.2.2-rc.1" },
+  "exports": {
+    ".": "./dist/index.js",
+    "./client": "./dist/client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": ["dist/index.js", "dist/client.js", "cordis.patch.yml", "locale/en.json", "locale/zh.json", "icon.svg", "LICENSE", "NOTICE.md", "THIRD-PARTY-NOTICES.md", "README.md"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test.mjs",
+    "typecheck": "tsc --noEmit",
+    "check": "node scripts/check.mjs",
+    "upstream:check": "node scripts/upstream-check.mjs",
+    "release:check": "node scripts/release-check.mjs"
+  },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": ["@deepseek-ai/dsh-client-ui-conversation", "@deepseek-ai/dsh-client-ui-sidebar-right", "@deepseek-ai/dsh-client-ui-workspace"]
+    }
+  },
+  "devDependencies": {
+    "@deepseek-ai/schemastery": "3.19.0",
+    "@types/node": "24.19.2",
+    "@types/react": "18.3.31",
+    "esbuild": "0.25.12",
+    "react": "18.3.1",
+    "typescript": "5.9.3",
+    "yaml": "2.9.1",
+    "zod": "4.4.3"
+  }
+}

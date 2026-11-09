@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Switchboard",
+    "description": "See which dsh sessions are waiting on you, what they need, and the tasks they delegated. Ported from Fstrategy/switchboard; community-made, not an official DeepSeek product."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "repository": "https://github.com/Fstrategy/switchboard",
+  "commit": "07b07b63fc56add654f62f823fd1e8105fd2c8a8",
+  "version": "0.1.0",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2026 Lumir",
+  "files": {
+    "LICENSE": {
+      "source": "LICENSE",
+      "sha256": "84cc2ce7d704de05dcefadc88cba8d82c581b43b50304ddf0abc15699c32268b"
+    },
+    "hooks/logic.ts": {
+      "source": "hooks/logic.ts",
+      "sha256": "9fdf8328d3dadc402647d303f6f6ae3ebb04f05c8911d0ce22b77449a6000544"
+    },
+    "hooks/i18n.ts": {
+      "source": "hooks/i18n.ts",
+      "sha256": "25081dbaba9a86763641a65fdc6a29e978452d94c29ea1faeb8f72be2d9be840"
+    },
+    "hooks/demo.ts": {
+      "source": "hooks/demo.ts",
+      "sha256": "15c6be7cbce17c9bde029bc4b48896d4f4a72ff96087a15261100caecb89a304"
+    }
+  },
+  "adaptations": [
+    {
+      "path": "types/index.d.ts",
+      "source": "types/index.d.ts",
+      "change": "Removed only the final Claude Code module augmentation; retained upstream data declarations."
+    }
+  ]
+}

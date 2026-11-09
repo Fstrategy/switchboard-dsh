@@ -1,0 +1,8 @@
+- insert:
+    - id: switchboard-dsh
+      name: '@fstrategy/switchboard-dsh'
+      config:
+        summaries: false
+        modelMode: fake
+        language: auto
+        openPane: auto

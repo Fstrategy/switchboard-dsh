@@ -1,0 +1,20 @@
+# Local dependencies, stores and test outputs
+node_modules/
+.pnpm-store/
+.test-build/
+artifacts/
+*.tgz
+*.tar.gz
+coverage/
+*.log
+.DS_Store
+
+# Never publish machine-local state or authentication
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+
+# dist/ is intentionally committed so Git source installation needs no prepare script.
