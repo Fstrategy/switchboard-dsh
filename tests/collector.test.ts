@@ -166,6 +166,21 @@ const rig = (t: TestContext, fixtures: Fixture[], options: RigOptions = {}) => {
 }
 const byId = (facts: Facts) => new Map(facts.sessions.map(session => [session.id, session as NativeFact]))
 
+test('rc.3 projection: wrapped runtime snapshots and clears are not human tasks or question answers', () => {
+  const state = applyEvent(initialState(header('runtime-reminders')), ask('still-pending'))
+  for (const source of [
+    { kind: 'runtime-context' },
+    { kind: 'runtime-context', form: 'snapshot', sections: [] },
+  ]) {
+    const next = applyEvent(state, event('user/message', {
+      source, content: [{ type: 'text', text: '<system-reminder>Current runtime context</system-reminder>' }],
+    }))
+    assert.strictEqual(next, state)
+    assert.equal(next.firstInput, '')
+    assert.ok(next.questions['still-pending'])
+  }
+})
+
 test('projection: a native question survives unrelated results and only its matched result removes it', () => {
   const initial = initialState(header('one'))
   assert.equal(applyEvent(initial, event('unrelated/event', {})), initial)
@@ -189,7 +204,7 @@ test('projection: approval asked/decided is matched by id and turn end clears ob
   state = applyEvent(state, event('approval/asked', { id: 'a1', toolName: 'write', reason: 'outside workspace' }))
   state = applyEvent(state, event('approval/asked', { id: 'a2', toolName: 'run', reason: 'needs permission' }))
   assert.equal(state.approvals.a1?.text, 'write: outside workspace')
-  const decided = applyEvent(state, event('approval/decided', { id: 'a1', decision: 'allow' }))
+  const decided = applyEvent(state, event('approval/decided', { id: 'a1', outcome: 'allowed-once' }))
   assert.equal(decided.approvals.a1, undefined)
   assert.ok(decided.approvals.a2)
   const ended = applyEvent(decided, event('turn/end', { reason: { kind: 'aborted' } }))

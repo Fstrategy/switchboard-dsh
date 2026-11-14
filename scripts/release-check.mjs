@@ -34,12 +34,12 @@ const sorted = values => [...values].sort()
 
 export function verifyManifest(pkg, { packed = false } = {}) {
   assert.equal(pkg.name, '@lumir_kumou/switchboard-dsh')
-  assert.equal(pkg.version, '0.1.1')
+  assert.equal(pkg.version, '0.1.2')
   assert.equal(pkg.private, false)
   assert.equal(pkg.license, 'MIT')
   assert.equal(pkg.type, 'module')
   assert.equal(pkg.engines.node, '>=24.9.0')
-  assert.equal(pkg.engines.dsh, '0.2.2-rc.1')
+  assert.equal(pkg.engines.dsh, '0.2.2-rc.3')
   // pnpm pack omits this source-only development-tool pin. It must never change to another value.
   if (!packed || Object.hasOwn(pkg, 'packageManager')) assert.equal(pkg.packageManager, 'pnpm@11.28.5')
   assert.equal(pkg.repository.url, 'https://github.com/Fstrategy/switchboard-dsh.git')

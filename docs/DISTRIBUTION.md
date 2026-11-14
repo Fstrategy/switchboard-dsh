@@ -1,43 +1,32 @@
 # Distribution and plugin-page installation
 
-Switchboard dsh is an independent community plugin, not an official DeepSeek product. The `0.1.1` distribution target is `@lumir_kumou/switchboard-dsh`, with declared Harness compatibility exactly `0.2.2-rc.1`. The GitHub repository remains `Fstrategy/switchboard-dsh`. These instructions do not certify that npm or GitHub publication has completed; the selected source must actually offer the requested version.
+Switchboard dsh is an independent community plugin, not an official DeepSeek product. The `0.1.2` distribution target is `@lumir_kumou/switchboard-dsh`, with declared Harness compatibility exactly `0.2.2-rc.3`. The GitHub repository remains `Fstrategy/switchboard-dsh`. These instructions do not certify that npm or GitHub publication has completed; the selected source must actually offer the requested version.
 
-## Primary route: install by npm package name
+## Primary route: install the matching GitHub Release archive
+
+Once the planned `v0.1.2` Release asset is published and downloadable:
 
 1. Open **Plugins → Add plugin** in DeepSeek Harness.
-2. Enter the package name and choose **Install**:
-
-   ```text
-   @lumir_kumou/switchboard-dsh
-   ```
-
+2. Paste the full public archive URL below and choose **Install**.
 3. Review the source and trust notice.
 4. When installation finishes, choose **Enable now**. Closing the dialog instead leaves the bundle installed but off.
-5. Follow any restart instruction the Harness reports. Package installation alone does not establish successful activation or rendering.
+5. Follow any restart instruction the Harness reports. Package installation alone does not establish successful activation or rendering; these instructions do not claim an actual GUI click test.
 
-**Installing the public package needs no npm account or npm login.** npm authorization, publishing permission, browser confirmation, and possible two-factor authentication apply to the maintainer publishing the package—not to users installing it.
+**Installing needs no npm account or npm login.** The npm identity `@lumir_kumou/switchboard-dsh` is prepared but unpublished. The `0.1.1` draft was never published because maintainer 2FA remains pending; package-name installation is currently unavailable. npm authorization and two-factor authentication belong to the maintainer, not installing users. Never share credentials or verification codes in chat.
 
-### Official npm registry and mirror delay
-
-A mainland China mirror may not yet have a newly published package or version. In the install dialog's **Registry** selector, choose the **official npm registry** (`https://registry.npmjs.org/`) and specify the exact release:
+The primary planned archive URL is:
 
 ```text
-@lumir_kumou/switchboard-dsh@0.1.1
+https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.2/lumir_kumou-switchboard-dsh-0.1.2.tgz
 ```
 
-The registry selection affects this installation. A missing mirror copy is not a request to log in. If the official registry also has no such version, verify publication status rather than trying credentials or disabling package-manager security policy. Registry availability and the package manager's release-age policy can affect a fresh release; an exact version is not a promise to bypass those protections.
+Publish the tested prepacked archive to GitHub; optional later npm publication must use the same approved bytes. A GitHub-hosted archive is a separate endpoint, not npm registration of the package name. Its download needs no npm login. Do not use the release page, GitHub source ZIP, or repository web page in place of the archive.
 
-## Alternative: install the matching GitHub Release archive
+### Optional npm route, only after verified publication
 
-Once the `v0.1.1` Release asset is available, paste its full public URL into **Add plugin**, choose **Install**, then **Enable now**:
+After the maintainer completes official npm authorization/2FA and verifies the public version, package-name installation may use `@lumir_kumou/switchboard-dsh@0.1.2`. If a mirror lags, choose the official npm registry (`https://registry.npmjs.org/`) in **Registry**. Until then, an absent official package is unpublished, not a mirror or installer-login problem. Release-age policy may also apply; an exact version does not bypass it.
 
-```text
-https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.1/lumir_kumou-switchboard-dsh-0.1.1.tgz
-```
-
-The maintainer publishes the same tested prepacked archive to npm and GitHub. A GitHub-hosted archive is a separate distribution endpoint, not a substitute for npm registration of the package name. Its download needs no npm login. Do not use the release page, GitHub source ZIP, or repository web page in place of the archive.
-
-The immutable [legacy v0.1.0 asset](<https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.0/fstrategy-switchboard-dsh-0.1.0.tgz>) retains the identity `@fstrategy/switchboard-dsh`; do not overwrite it or treat it as the new npm package.
+The immutable [legacy v0.1.0 asset](<https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.0/fstrategy-switchboard-dsh-0.1.0.tgz>) retains the identity `@fstrategy/switchboard-dsh` and exact `0.2.2-rc.1` compatibility for rc.1 users; do not overwrite it or treat it as the new package.
 
 The Host still uses its package manager to install a tarball, and dependencies can contact a registry. Changing registries cannot mirror an unreachable GitHub asset. The archive must actually contain the built Host/Client entry points, bundle patch, exported locales, icon, and license notices; a local linked checkout working is not proof that a packed archive is complete.
 
@@ -45,23 +34,23 @@ The Host still uses its package manager to install a tarball, and dependencies c
 
 ### Other accepted source forms
 
-Harness `0.2.2-rc.1` accepts package names with optional versions/ranges/tags; `github:Fstrategy/switchboard-dsh#v0.1.1`; explicit Git addresses such as `git+https://github.com/Fstrategy/switchboard-dsh.git#v0.1.1`; public HTTP(S) tarball URLs ending in `.tgz` or `.tar.gz`; and absolute local package-directory paths, optionally prefixed with `file:` or `link:`.
+Harness `0.2.2-rc.3` accepts package names with optional versions/ranges/tags; `github:Fstrategy/switchboard-dsh#v0.1.2`; explicit Git addresses such as `git+https://github.com/Fstrategy/switchboard-dsh.git#v0.1.2`; public HTTP(S) tarball URLs ending in `.tgz` or `.tar.gz`; and absolute local package-directory paths, optionally prefixed with `file:` or `link:`.
 
 A selected Git ref must contain an installable bundle and its built entry points. Git installations can require preparation/build-script approval. Bare `Fstrategy/switchboard-dsh` is not accepted shorthand by this GUI parser. Plain HTTPS repository URLs must not have a trailing slash; avoid query strings appended after a tarball extension. Relative local paths are not accepted. A Git/tarball preview checks form and host, not the remote manifest and compatibility before downloading it.
 
 ## Migration, compatibility, and upgrades
 
-Uninstall the earlier local prototype and/or `@fstrategy/switchboard-dsh` through **Plugins** before installing `@lumir_kumou/switchboard-dsh`; the exact names and steps are in the [migration guide](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/README.md#从旧包迁移>). The identities share services, commands, and storage domains and must not run side by side. Disabling alone leaves the old dependency installed. Retain any settings you need and follow restart instructions; migration does not require deleting conversation logs or manually rewriting the profile.
+Uninstall the earlier local prototype and/or `@fstrategy/switchboard-dsh` through **Plugins** before installing `@lumir_kumou/switchboard-dsh`; the exact names and steps are in the [migration guide](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.2/README.md#从旧包迁移>). The identities share services, commands, and storage domains and must not run side by side. Disabling alone leaves the old dependency installed. Retain any settings you need and follow restart instructions; migration does not require deleting conversation logs or manually rewriting the profile.
 
-The declared `engines.dsh` range remains exactly `0.2.2-rc.1`; other runtimes and additional native platforms are not asserted as tested. The installer and launcher enforce compatibility. A version-exemption warning is not a normal installation step or evidence that an untested runtime works.
+The declared `engines.dsh` range remains exactly `0.2.2-rc.3`; other runtimes and additional native platforms are not asserted as tested. The installer and launcher enforce compatibility. A version-exemption warning is not a normal installation step or evidence that an untested runtime works.
 
-Git, tarball, and local-path installations have no registry **Versions** section in this Harness version: uninstall the old bundle, install the chosen new source, then enable it. A package-identity change is also uninstall/reinstall, not an in-place update. Eligible same-name npm installations can expose **Versions** for later published registry updates. Review compatibility and migration notes before any upgrade.
+Tarball and local-path upgrades require uninstalling the old bundle, installing the chosen new source, then enabling it. rc.3 supports `updateBundle` for eligible Git installations pinned to full commits when the new commit belongs to the same repository directory; this is not a tarball update route. A package-identity change still requires uninstall/reinstall. Eligible same-name npm installations can expose registry versions only after publication. Review compatibility and migration notes before any upgrade.
 
 ## Optional Discover index: explicit user opt-in
 
 An npm publication, GitHub release, or `dsh-plugin` topic does **not** automatically place Switchboard dsh in **Discover**, the Official catalog, or the default plugin list.
 
-Harness `0.2.2-rc.1` provides **Custom plugin indexes**, experimental and off in shipped profiles. To use an independent index:
+Harness `0.2.2-rc.3` provides **Custom plugin indexes**, experimental and off in shipped profiles. To use an independent index:
 
 1. Enable **Plugins → Experimental plugins → Custom plugin indexes**.
 2. Open **Discover → Add index source**, or **Manage index sources…** in its index menu.
@@ -102,10 +91,10 @@ function switchboardNpmIndex(publishTimestamp) {
       icon: 'icon.svg',
       metadata: { keywords: ['switchboard', 'dsh', 'session board'] },
       versions: [{
-        version: '0.1.1',
+        version: '0.1.2',
         publishTimestamp,
         source: { type: 'npm', registry: 'https://registry.npmjs.org/' },
-        engines: { dsh: '0.2.2-rc.1' },
+        engines: { dsh: '0.2.2-rc.3' },
       }],
     }],
   }
@@ -114,7 +103,7 @@ function switchboardNpmIndex(publishTimestamp) {
 
 Use real publication time in **seconds**, not JavaScript milliseconds. The listed name/version and compatibility must match the package manifest. A Git version instead needs the actual lowercase full 40-character commit SHA of an installable prebuilt source; its source must never point at a Release `.tgz` URL.
 
-For the root raw-index URL above, `"icon": "icon.svg"` resolves beside that document to the repository's raw [icon.svg](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/icon.svg>), not against the npm registry or repository metadata. Keep that resource reachable; an index hosted elsewhere needs its own adjacent icon or an absolute HTTPS image URL. Browser rendering must still be checked separately.
+For the root raw-index URL above, `"icon": "icon.svg"` resolves beside that document to the repository's raw [icon.svg](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.2/icon.svg>), not against the npm registry or repository metadata. Keep that resource reachable; an index hosted elsewhere needs its own adjacent icon or an absolute HTTPS image URL. Browser rendering must still be checked separately.
 
 Names and exact versions must be unique within their respective scopes. Each plugin needs at least one exact SemVer version, integer Unix timestamp, and supported source. Localized objects require `en` and lowercase language identifiers such as `zh`. Optional category/label/sort-key references need declarations in root metadata. Invalid sources, duplicates, or undeclared references reject the whole document. Validate against the matching Harness version before publishing an actual index.
 
@@ -124,7 +113,7 @@ Upstream recommends the GitHub `dsh-plugin` topic for topic/search discoverabili
 
 ## Upstream evidence
 
-These mechanisms were checked against installed Harness `0.2.2-rc.1`; upstream documentation can change with later releases.
+These mechanisms were checked against installed Harness `0.2.2-rc.3`; upstream documentation can change with later releases.
 
 - [Plugins installation UI, registries, enablement, and registry versions](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/client/ui-plugin-manager/README.md#installing-a-bundle)
 - [Install-spec parser](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/boot/plugin-manager/src/install-spec.ts)

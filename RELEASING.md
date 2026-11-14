@@ -1,13 +1,13 @@
 # Releasing
 
-The `0.1.1` release target is the public npm package `@lumir_kumou/switchboard-dsh` plus the matching GitHub Release in `Fstrategy/switchboard-dsh`. The earlier `v0.1.0` asset and its `@fstrategy/switchboard-dsh` identity remain immutable. Instructions below are a procedure, not a claim that either `0.1.1` publication has completed.
+The `0.1.2` primary release target is the GitHub Release archive in `Fstrategy/switchboard-dsh`, with package identity `@lumir_kumou/switchboard-dsh` and exact DSH `0.2.2-rc.3` compatibility. The npm identity is prepared but unpublished: the `0.1.1` draft was never published because maintainer 2FA remains pending. The earlier `v0.1.0` asset and its `@fstrategy/switchboard-dsh` identity remain immutable for exact rc.1 users. Instructions below are a procedure, not a claim that publication or an actual GUI click test has completed.
 
-**Ship one tested, prepacked tarball to both npm and GitHub.** Do not publish from the working directory or rebuild/repack between destinations. Installing the public package requires no npm login; publishing requires an authorized maintainer who controls the npm scope and has GitHub release permission.
+**Ship one tested, prepacked tarball to GitHub; optional npm publication later must use the same approved bytes.** Do not publish from the working directory or rebuild/repack between destinations. Installing the archive requires no npm login. npm publishing requires an authorized maintainer who controls the scope and completes the official authorization/2FA flow; GitHub release publication requires repository permission.
 
 ## Local release gates
 
-1. Keep `engines.dsh` at the exact runtime actually tested: `0.2.2-rc.1`. Do not widen compatibility or platform claims on assumption.
-2. Verify the release manifest, bundle patch, built Client registration, and documentation consistently use `@lumir_kumou/switchboard-dsh` and version `0.1.1`. Keep shared behavior identifiers unchanged; users must uninstall older identities before migration.
+1. Keep `engines.dsh` at the exact runtime actually tested: `0.2.2-rc.3`. Do not widen compatibility or platform claims on assumption.
+2. Verify the release manifest, bundle patch, built Client registration, and documentation consistently use `@lumir_kumou/switchboard-dsh` and version `0.1.2`. Keep shared behavior identifiers unchanged; users must uninstall older identities before migration.
 3. Use pinned development dependencies, rebuild, and run fake-only checks:
 
    ```sh
@@ -25,17 +25,17 @@ The `0.1.1` release target is the public npm package `@lumir_kumou/switchboard-d
 
    ```sh
    pnpm pack --pack-destination artifacts
-   node scripts/release-check.mjs artifacts/lumir_kumou-switchboard-dsh-0.1.1.tgz
+   node scripts/release-check.mjs artifacts/lumir_kumou-switchboard-dsh-0.1.2.tgz
    ```
 
    This package has no automatic install, pack, or publish lifecycle scripts. Review the archive's exact runtime allowlist and checksum. Do not reuse local acceptance archives, verification receipts, or full-window screenshots. Record the archive digest; no later build or repack may silently replace the bytes being approved.
 
-## npm publication: explicit maintainer action
+## Optional npm publication: explicit maintainer action after 2FA
 
 Confirm that the npm version is available to publish and that the authenticated user has permission for `@lumir_kumou`. Use the official npm registry, not a read-only mirror. The publishing CLI for this procedure is npm `11.19.1`.
 
 ```sh
-npm publish ./artifacts/lumir_kumou-switchboard-dsh-0.1.1.tgz --access public --registry https://registry.npmjs.org/ --ignore-scripts
+npm publish ./artifacts/lumir_kumou-switchboard-dsh-0.1.2.tgz --access public --registry https://registry.npmjs.org/ --ignore-scripts
 ```
 
 Keep the `./` prefix: npm can interpret an unprefixed two-component path as a GitHub repository shorthand. Publish the **tested archive file**, not `npm publish .`. Explicit `--access public` makes the scoped package public; `--ignore-scripts` prevents publish-time lifecycle hooks. Do not modify the archive after approval.
@@ -46,21 +46,21 @@ After npm confirms publication, verify the exact public name/version and anonymo
 
 ## GitHub publication: use the same bytes
 
-Tag the reviewed source as `v0.1.1`, push only the approved public repository content, and attach the same `lumir_kumou-switchboard-dsh-0.1.1.tgz` to that release with its checksum and fake-test result. Its asset URL is:
+Tag the reviewed source as `v0.1.2`, push only the approved public repository content, and attach the same `lumir_kumou-switchboard-dsh-0.1.2.tgz` to that release with its checksum and fake-test result. Its asset URL is:
 
 ```text
-https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.1/lumir_kumou-switchboard-dsh-0.1.1.tgz
+https://github.com/Fstrategy/switchboard-dsh/releases/download/v0.1.2/lumir_kumou-switchboard-dsh-0.1.2.tgz
 ```
 
-Verify the asset downloads without authentication and matches the tested archive and the npm tarball. Never overwrite or relabel the existing `v0.1.0` artifact. GitHub Actions workflows and expanded GitHub workflow scope are not required; the release gates above are local commands.
+Verify the asset downloads without authentication and matches the tested archive. If npm publication later completes, compare that tarball too. Never overwrite or relabel the existing `v0.1.0` artifact. GitHub Actions workflows and expanded GitHub workflow scope are not required; the release gates above are local commands.
 
 Verify installation and activation through the same plugin-manager entry point used by **Plugins → Add plugin**, only with separate permission to change a test profile. A successful download, archive check, or package-manager exit alone does not prove activation or rendered UI. Do not claim an actual GUI click test that was not performed.
 
 ## Installation and optional index instructions
 
-Publish the primary instructions as **Plugins → Add plugin → `@lumir_kumou/switchboard-dsh` → Install → Enable now**. Show the exact version `@lumir_kumou/switchboard-dsh@0.1.1` and official registry `https://registry.npmjs.org/` for a mirror that has not synchronized. Installation itself requires no npm account or login. Keep the matching GitHub Release URL as an alternative and link the [migration guidance](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/README.md#从旧包迁移>).
+Publish the primary instructions as **Plugins → Add plugin → paste the full GitHub Release archive URL → Install → Enable now**, using the exact `v0.1.2` asset URL above only once downloadable. Installation requires no npm account or login. Keep npm package-name installation explicitly unavailable until the maintainer completes 2FA and verifies public `@lumir_kumou/switchboard-dsh@0.1.2`; only then offer it with official registry `https://registry.npmjs.org/`. Link the [migration guidance](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.2/README.md#从旧包迁移>): uninstall old `@fstrategy` before installing `@lumir_kumou`, because behavior identifiers collide. Tarball upgrades remain uninstall/reinstall; rc.3's eligible same-repository Git commit update support does not change that.
 
-Only after verifying actual npm publication should the optional root index be updated to the new package identity/version with `source: { "type": "npm", "registry": "https://registry.npmjs.org/" }`, the real npm publication timestamp in Unix seconds, and `engines.dsh: "0.2.2-rc.1"`. Validate the resulting JSON. Do not retarget the old Git-backed `0.1.0` entry to a different identity or pretend a Release `.tgz` URL is a Git source. The index is explicitly user-added, not an official or default catalog. See [distribution details](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.1/docs/DISTRIBUTION.md>).
+Only after verifying actual npm publication should the optional root index be updated to the new package identity/version with `source: { "type": "npm", "registry": "https://registry.npmjs.org/" }`, the real npm publication timestamp in Unix seconds, and `engines.dsh: "0.2.2-rc.3"`. Validate the resulting JSON. Do not retarget the old Git-backed `0.1.0` entry to a different identity or pretend a Release `.tgz` URL is a Git source. The index is explicitly user-added, not an official or default catalog. See [distribution details](<https://github.com/Fstrategy/switchboard-dsh/blob/v0.1.2/docs/DISTRIBUTION.md>).
 
 ## Do not publish
 

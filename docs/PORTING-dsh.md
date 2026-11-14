@@ -2,11 +2,11 @@
 
 Community port of [Fstrategy/switchboard](https://github.com/Fstrategy/switchboard), originally by Lumir (MIT). Not an official DeepSeek/dsh product. Baseline: upstream commit `07b07b63fc56add654f62f823fd1e8105fd2c8a8`. See [attribution](<../NOTICE.md>), [license](<../LICENSE>) and [provenance hashes](<../UPSTREAM.json>).
 
-The implementation targets **dsh 0.2.2-rc.1**. Package/API contracts and the installed implementation take precedence over newer upstream documentation. Public source deliberately excludes machine-local acceptance receipts, personal session logs/IDs and full-window screenshots.
+The current v0.1.2 implementation targets **dsh 0.2.2-rc.3**; the immutable v0.1.0 release targets rc.1. Package/API contracts and the installed implementation take precedence over newer upstream documentation. Public source deliberately excludes machine-local acceptance receipts, personal session logs/IDs and full-window screenshots.
 
-## npm distribution identity (v0.1.1)
+## Package identity and publication status
 
-The npm package is `@lumir_kumou/switchboard-dsh`. The GitHub repository remains `Fstrategy/switchboard-dsh`; GitHub account names do not grant ownership of the same npm scope. The immutable v0.1.0 GitHub release used the earlier package identity and is retained as a historical alternative.
+The prepared npm-format package identity is `@lumir_kumou/switchboard-dsh`. The v0.1.1 npm publication draft was rejected by npm's mandatory maintainer 2FA policy and was not published. v0.1.2 uses GitHub Releases for the compatible public artifact; a package name is not a registry install instruction until actual npm publication is verified. The GitHub repository remains `Fstrategy/switchboard-dsh`; GitHub account names do not grant ownership of the same npm scope. The immutable v0.1.0 GitHub release used the earlier package identity and is retained as a historical alternative.
 
 The v0.1.1 change coordinates the package manifest, bundle patch, browser module-loader id and Client registration id. Behavioral service/projection/cache/command IDs stay stable, so old and new packages must not be enabled together. Remove the earlier installation before enabling the npm package. This is a distribution/identity update, not a new runtime API or broader compatibility claim.
 
@@ -15,6 +15,24 @@ The v0.1.1 change coordinates the package manifest, bundle patch, browser module
 - [Pure board logic](<../hooks/logic.ts>), [English/Chinese strings and prompts](<../hooks/i18n.ts>) and [demo facts](<../hooks/demo.ts>) are byte-for-byte copies, checked against pinned SHA-256 values.
 - [Original data types](<../types/index.d.ts>) omit only the final Claude Code module augmentation.
 - Original Claude strings and unused navigation helper remain in those copies. The dsh adapter never executes the Claude collector, Python scripts or terminal AppleScript.
+
+## rc.1 → rc.3 migration review (v0.1.2)
+
+The installed rc.3 CLI manifest, exact Host/Event Inspect contracts, Client slot declarations and owning package source were checked. The installed upgrade index has one applicable leaving-version section, `v0.2.2-rc.1`, and no `v0.2.2-rc.2` section. No production API break was confirmed for the adapter's used surfaces; the old exact rc.1 engine declaration was the activation blocker.
+
+| Reviewed guide / surface | Outcome |
+| --- | --- |
+| Engine compatibility | Set the new release to exact `0.2.2-rc.3`; keep guards aligned. No exemption or unknown future-version range. |
+| Runtime-context reminders | Existing source.kind discrimination already ignores wrapped snapshots/clears. Added a regression proving those records do not become a human task or settle a pending question. |
+| Session.append overloads | Production neither replaces nor calls append; no wrapper migration. |
+| Archive worktrees | Registry archive visibility stays authoritative; adapter does not open, delete or reconstruct checkout directories. |
+| Window drag regions | Ordinary in-flow sidebar/composer content, not custom overlays covering a drag row. No speculative no-drag workaround. |
+| Plugin-manager update method | Board does not consume BundleInfo.updatable. Distribution docs distinguish rc.3's eligible commit-pinned Git update from tarball reinstall. |
+| Native services/events | Registry status, query/projection leases, approvals/questions, native command/Fetch transport, storage and Config editor signatures match. Approval test fixture now uses the actual outcome field. |
+
+Skipped after checking the plugin's surface usage: account notifications/Remote imports (no account API); attachment error codes (no attachment API/error-name match); CUA guides (no computer-use provider); Forge guides (no Forge integration); terminal guides (no terminal backend); search billing (no search/credential calls); interrupt default (no interrupt invocation); dsh-doc replacement (development skill, not plugin runtime).
+
+Only rc.3 is claimed for this new release. rc.1's historical native verification remains below, not relabeled as a new dual-version test; rc.2 and later runtimes are not implicitly certified.
 
 ## Native facts
 
@@ -95,3 +113,11 @@ Known limits: Windows/Linux native UI/install, dark-mode pixels, real paid provi
 - Public Host Config entry and active Client composer slot use `@fstrategy/switchboard-dsh`; the running Host tool reads native facts successfully. A local-only window capture confirmed the installed public board and composer band rendered in the current GUI.
 - Summaries remained disabled: summary modelCalls=0, liveModelCalls=0, diagnostics=[]. No paid model was used for tests or verification.
 - The full-window verification capture and installation logs are not public assets. Only the reviewed synthetic demo-pane crop is distributed in this repository.
+
+### v0.1.2 on the running rc.3 installation
+
+- 88 fake-only tests passed, including the added wrapped-runtime-context/clear regression; strict TypeScript, upstream provenance and bundle checks passed.
+- Local v0.1.2 activation on actual dsh 0.2.2-rc.3 returned application=applied and warnings=[]. No version exemption was granted.
+- The Host Config entry and live composer slot use the prepared public package identity. Native status reads returned diagnostics=[] with summaries=false, modelCalls=0 and liveModelCalls=0.
+- A native local-only window capture confirmed the board, coordinator/children, idle rows and composer band rendered in the current rc.3 GUI. The capture contains private conversation context and is not published.
+- This verifies the current rc.3 runtime only; it is not a new rc.1/rc.2, dark-mode, multi-OS or paid-provider test. Registry publication remains a separate maintainer 2FA step.
