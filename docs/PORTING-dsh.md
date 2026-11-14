@@ -117,7 +117,8 @@ Known limits: Windows/Linux native UI/install, dark-mode pixels, real paid provi
 ### v0.1.2 on the running rc.3 installation
 
 - 88 fake-only tests passed, including the added wrapped-runtime-context/clear regression; strict TypeScript, upstream provenance and bundle checks passed.
-- Local v0.1.2 activation on actual dsh 0.2.2-rc.3 returned application=applied and warnings=[]. No version exemption was granted.
+- Both local preview and reinstallation from the actual public v0.1.2 GitHub HTTPS asset on dsh 0.2.2-rc.3 returned application=applied and warnings=[]. No version exemption was granted. Anonymous download matched SHA-256 `4d66bc8d1d23650e3d3fcfa1d7c376f4247cdc40e904c3386599e512354a6936`.
 - The Host Config entry and live composer slot use the prepared public package identity. Native status reads returned diagnostics=[] with summaries=false, modelCalls=0 and liveModelCalls=0.
 - A native local-only window capture confirmed the board, coordinator/children, idle rows and composer band rendered in the current rc.3 GUI. The capture contains private conversation context and is not published.
+- The actual rc.3 market-index parser accepted the two-entry public index; its bundled SemVer matcher accepts the new entry on rc.3, rejects it on rc.4, and correctly rejects the legacy rc.1 entry on rc.3.
 - This verifies the current rc.3 runtime only; it is not a new rc.1/rc.2, dark-mode, multi-OS or paid-provider test. Registry publication remains a separate maintainer 2FA step.

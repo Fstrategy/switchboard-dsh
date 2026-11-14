@@ -62,7 +62,7 @@ Harness `0.2.2-rc.3` provides **Custom plugin indexes**, experimental and off in
 
 4. Check the entry's actual package name, source, and version before confirming installation, then enable the installed bundle.
 
-The existing index may still offer the legacy Git-backed `0.1.0` package until the maintainer updates it after verifying npm publication. A documentation example does not update the live index or install anything in a user's profile. Do not co-install an older identity from an index with the new npm identity.
+The published root index lists the new Git-backed `0.1.2` package for rc.3 and a separately labeled legacy `0.1.0` package for rc.1. Both pin actual prebuilt source commits and explicit engines; neither depends on an unpublished npm package. Do not co-install the identities. Adding the index is a user's explicit opt-in, not a change this release makes to everyone's profile.
 
 There is no official index configured by default. Authors may host their own indexes without upstream approval; another community index's inclusion policy belongs to its maintainer. Every user still chooses which sources to add. An index label called “official” is only that index's claim, not DeepSeek verification.
 

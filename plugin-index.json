@@ -3,14 +3,33 @@
   "title": {"en":"Switchboard dsh community index","zh":"Switchboard dsh 社区索引"},
   "description": {"en":"Independent Switchboard dsh releases. Not an official DeepSeek catalog.","zh":"独立发布的 Switchboard dsh 社区插件，非 DeepSeek 官方目录。"},
   "plugins": [{
-    "name": "@fstrategy/switchboard-dsh",
-    "title": {"en":"Switchboard dsh","zh":"Switchboard dsh 会话看板"},
-    "description": {"en":"A native session board for DeepSeek Harness.","zh":"DeepSeek Harness 原生会话看板，查看等待动作并跳转回复。"},
-    "author": "Fstrategy",
+    "name": "@lumir_kumou/switchboard-dsh",
+    "title": {"en":"Switchboard for DSH rc.3","zh":"Switchboard 会话看板（DSH rc.3）"},
+    "description": {"en":"Native session board for DSH 0.2.2-rc.3. Remove the earlier package before enabling.","zh":"适配 DSH 0.2.2-rc.3 的原生会话看板；启用前卸载旧包，不要并存。"},
+    "author": "Lumir",
     "homepage": "https://github.com/Fstrategy/switchboard-dsh",
     "repository": {"url":"https://github.com/Fstrategy/switchboard-dsh"},
     "icon": "icon.svg",
     "metadata": {"keywords":["switchboard","dsh","session board"]},
+    "versions": [{
+      "version": "0.1.2",
+      "publishTimestamp": 1794673301,
+      "source": {
+        "type": "git",
+        "url": "https://github.com/Fstrategy/switchboard-dsh",
+        "commit": "02d143cd6cd9e3cc3a82749028ec4745e5fb07cb"
+      },
+      "engines": {"dsh":"0.2.2-rc.3"}
+    }]
+  }, {
+    "name": "@fstrategy/switchboard-dsh",
+    "title": {"en":"Switchboard legacy — DSH rc.1 only","zh":"Switchboard 旧版（仅 DSH rc.1）"},
+    "description": {"en":"Legacy rc.1 release, incompatible with rc.3. Do not co-install with the new package.","zh":"仅适用 rc.1 的旧版本，不兼容 rc.3；不要与新包并存启用。"},
+    "author": "Fstrategy",
+    "homepage": "https://github.com/Fstrategy/switchboard-dsh",
+    "repository": {"url":"https://github.com/Fstrategy/switchboard-dsh"},
+    "icon": "icon.svg",
+    "metadata": {"keywords":["switchboard","dsh","legacy"]},
     "versions": [{
       "version": "0.1.0",
       "publishTimestamp": 1794230537,
